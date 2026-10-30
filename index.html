@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>KK Games</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="KK Games bağımsız bir mobil oyun stüdyosu. Plop Hop: tek kaydırma, tek kesim, kusursuz oturuş. Oyun rehberi, basın kiti, destek ve gizlilik politikası.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Plop Hop · KK Games">
+<meta property="og:description" content="Tek kaydırma, tek kesim, kusursuz oturuş. 100 bölüm, 10 dünya, 10 boss, 50 kostüm.">
+<meta property="og:image" content="https://kkgames17.github.io/assets/og.jpg">
+<meta property="og:url" content="https://kkgames17.github.io/">
+<link rel="canonical" href="https://kkgames17.github.io/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#1B2140">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%231B2140'/%3E%3Ctext x='32' y='43' font-family='Arial Black,Arial' font-weight='900' font-size='28' fill='white' text-anchor='middle'%3EKK%3C/text%3E%3Crect x='6' y='30' width='52' height='4' fill='%23FF5A3C' transform='rotate(-14 32 32)'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@500;600;700;800;900&display=swap">
+<style>
+/* Layout: studio site in the game's own world — sky gradients, a strip of grass-and-dirt as section ground, ink-navy type, coral as the single action colour. Hash views: home · plop-hop · guide · press · support · privacy. */
+:root{
+  --sky:#DDF0FF; --sky2:#A9D9FF; --sky3:#7EC3FA; --paper:#FFFFFF; --soft:#F3F8FF; --ink:#1B2140; --ink2:#4B5479; --ink3:#7A83A6; --line:#DCE6F4;
+  --coral:#FF5A3C; --coral-d:#D8432A; --gold:#FFC23D; --mint:#2FCB71; --grass:#5CCB7A; --dirt:#B98B63; --night:#141936;
+  --common:#8E99AE; --rare:#2F86F0; --epic:#9A4BEF; --legend:#E09A0A;
+  --display:"Lilita One","Arial Rounded MT Bold","Trebuchet MS",sans-serif;
+  --body:"Nunito",ui-rounded,"Segoe UI",system-ui,sans-serif;
+  --r:22px; --shadow:0 1px 0 rgba(27,33,64,.04),0 10px 30px -12px rgba(27,33,64,.18);
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --sky:#141A3D; --sky2:#1B2352; --sky3:#26306A; --paper:#1D2554; --soft:#182049; --ink:#EEF2FF; --ink2:#B4BCE0; --ink3:#8790B8; --line:#2F3A75;
+  --common:#AEB7C9; --rare:#5BA6FF; --epic:#B87CFF; --legend:#FFC23D; --shadow:0 10px 30px -12px rgba(0,0,0,.5); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --sky:#141A3D; --sky2:#1B2352; --sky3:#26306A; --paper:#1D2554; --soft:#182049; --ink:#EEF2FF; --ink2:#B4BCE0; --ink3:#8790B8; --line:#2F3A75;
+  --common:#AEB7C9; --rare:#5BA6FF; --epic:#B87CFF; --legend:#FFC23D; --shadow:0 10px 30px -12px rgba(0,0,0,.5); color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--sky);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--paper)}
+img,video{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3,h4{font-family:var(--display);font-weight:400;letter-spacing:.2px;line-height:1.04;margin:0;text-wrap:balance}
+p{margin:0}
+.pad{padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1160px;margin:0 auto}
+.eyebrow{font-weight:900;letter-spacing:2.6px;font-size:12.5px;text-transform:uppercase;color:var(--coral)}
+.h2{font-size:clamp(32px,4.8vw,50px);margin-top:8px}
+.lead{color:var(--ink2);max-width:60ch;margin-top:14px;font-size:18.5px;line-height:1.55}
+.muted{color:var(--ink2)}
+section{padding-block:80px}
+.sec-tight{padding-block:56px}
+.center{text-align:center}.center .lead{margin-inline:auto}
+.btn{display:inline-flex;align-items:center;gap:10px;font:900 16px var(--body);text-decoration:none;padding:14px 22px;border-radius:999px;background:var(--coral);color:#fff;box-shadow:0 5px 0 var(--coral-d);border:0;cursor:pointer;transition:transform .12s}
+.btn:hover{transform:translateY(-2px)} .btn:active{transform:translateY(2px);box-shadow:0 2px 0 var(--coral-d)}
+.btn.ghost{background:var(--paper);color:var(--ink);box-shadow:0 5px 0 var(--line);border:2px solid var(--line)}
+.btn.small{padding:10px 16px;font-size:14.5px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:900;padding:5px 11px;border-radius:999px;background:var(--soft);border:1.5px solid var(--line);color:var(--ink2);white-space:nowrap}
+.card{background:var(--paper);border:1.5px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow)}
+.ground{height:30px;background:linear-gradient(var(--grass) 0 9px,var(--dirt) 9px);position:relative}
+.ground::after{content:"";position:absolute;inset:9px 0 0;background:radial-gradient(circle at 20% 60%,rgba(0,0,0,.08) 0 4px,transparent 5px) 0 0/90px 21px}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:8px}
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:16px;height:66px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--display);font-size:22px;flex:none}
+.kk{width:36px;height:36px;border-radius:11px;background:var(--ink);color:var(--paper);display:grid;place-items:center;font-size:17px;position:relative;overflow:hidden}
+.kk::after{content:"";position:absolute;left:-4px;right:-4px;top:50%;height:3px;background:var(--coral);transform:rotate(-14deg);box-shadow:0 0 6px var(--coral)}
+.menu{display:flex;gap:2px;margin-left:auto;align-items:center}
+.menu a{text-decoration:none;font-weight:800;font-size:15px;padding:8px 13px;border-radius:999px;color:var(--ink2)}
+.menu a:hover{color:var(--ink);background:var(--soft)}
+.menu a[aria-current="page"]{color:var(--ink);background:var(--soft);box-shadow:inset 0 0 0 1.5px var(--line)}
+.tools{display:flex;gap:8px;align-items:center;flex:none}
+.lang{display:flex;border:1.5px solid var(--line);border-radius:999px;overflow:hidden;background:var(--paper)}
+.lang button{font:900 12.5px var(--body);border:0;background:transparent;color:var(--ink2);padding:7px 10px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.burger{display:none;width:42px;height:42px;border-radius:12px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;font-size:20px;line-height:1}
+/* home hero */
+.hero{background:linear-gradient(180deg,var(--sky3) 0%,var(--sky2) 45%,var(--sky) 100%);position:relative;overflow:hidden}
+.hero::before,.hero::after{content:"";position:absolute;background:#fff;border-radius:60px;opacity:.55;filter:blur(.3px)}
+.hero::before{width:180px;height:44px;top:70px;left:6%;box-shadow:60px -18px 0 -6px #fff}
+.hero::after{width:140px;height:36px;top:150px;right:8%;box-shadow:-46px -14px 0 -4px #fff}
+:root[data-theme="dark"] .hero::before,:root[data-theme="dark"] .hero::after{opacity:.06}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .hero::before,:root:not([data-theme="light"]) .hero::after{opacity:.06}}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:40px;align-items:center;padding-block:70px 40px;position:relative;z-index:1}
+.hero h1{font-size:clamp(46px,7.4vw,92px)}
+.hero h1 .slice{position:relative;display:inline-block;color:var(--coral)}
+.hero h1 .slice::after{content:"";position:absolute;left:-4%;right:-4%;top:55%;height:6px;border-radius:4px;background:#fff;transform:rotate(-7deg);box-shadow:0 0 0 3px var(--coral),0 0 18px var(--coral);animation:slice 3.2s ease-in-out infinite}
+@keyframes slice{0%,55%{clip-path:inset(0 100% 0 0)}70%,92%{clip-path:inset(0 0 0 0)}100%{clip-path:inset(0 0 0 100%)}}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.phone{position:relative;width:min(300px,78%);margin:0 auto;border-radius:44px;background:#0E1230;padding:12px 11px 12px;box-shadow:0 40px 60px -24px rgba(14,18,48,.55),inset 0 0 0 2px #2A3270}
+.phone video,.phone img{width:100%;height:auto;aspect-ratio:9/16;object-fit:cover;border-radius:33px;background:#9FD3FF}
+.phone::before{content:"";position:absolute;top:4px;left:50%;width:60px;height:4px;border-radius:4px;background:#2A3270;transform:translateX(-50%)}
+.floaty{position:absolute;z-index:3;font-family:var(--display);font-size:20px;padding:8px 14px;border-radius:14px;background:var(--paper);color:var(--ink);box-shadow:var(--shadow);border:1.5px solid var(--line);animation:fl 4s ease-in-out infinite}
+.floaty.a{left:-6%;top:22%}.floaty.b{right:-6%;top:52%;animation-delay:-2s}.floaty.c{left:2%;bottom:10%;animation-delay:-1s}
+@keyframes fl{50%{transform:translateY(-10px)}}
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.stat{padding:20px 14px;text-align:center}
+.stat b{display:block;font-family:var(--display);font-weight:400;font-size:clamp(34px,4.6vw,48px);line-height:1;color:var(--ink)}
+.stat span{font-weight:800;color:var(--ink2);font-size:14.5px}
+/* feature / featured game */
+.featured{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);overflow:hidden}
+.featured .art{background:radial-gradient(120% 90% at 30% 20%,#BFE6FF,#5FB2F5);display:flex;align-items:flex-end;justify-content:center;gap:12px;padding:34px 20px 0;min-height:380px}
+.featured .art img{width:30%;max-width:170px;border-radius:20px 20px 0 0;border:5px solid #0E1230;border-bottom:0}
+.featured .art img:nth-child(2){transform:translateY(-22px)}
+.featured .copy{padding:36px;display:grid;gap:16px;align-content:center}
+.logo{font-family:var(--display);line-height:.86;display:inline-grid;position:relative;padding-top:.42em}
+.logo .p1{color:var(--ink);font-size:1em}
+.logo .p2{color:var(--coral);font-size:1em;text-shadow:0 .06em 0 var(--coral-d)}
+.logo .p2 span{display:inline-block}
+.logo .p2 span:nth-child(odd){transform:translateY(.04em) rotate(-4deg)} .logo .p2 span:nth-child(even){transform:rotate(4deg)}
+.logo .hopper{position:absolute;top:.02em;left:calc(50% - .17em);width:.34em;height:.34em;animation:hop 1.1s cubic-bezier(.3,.7,.4,1) infinite}
+@keyframes hop{0%,100%{transform:translateY(12%) scale(1.06,.94)}12%{transform:translateY(10%)}50%{transform:translateY(-14%)}}
+.logo .hopper svg{width:100%;height:100%;overflow:visible}
+.stores{display:flex;gap:10px;flex-wrap:wrap}
+.store{display:flex;align-items:center;gap:10px;padding:9px 16px 9px 12px;border-radius:14px;background:#0E1230;color:#fff;border:1.5px solid #2F3A75;min-width:170px;text-decoration:none;opacity:.95}
+.store svg{width:24px;height:24px;flex:none}
+.store small{display:block;font-size:11px;font-weight:800;opacity:.75;letter-spacing:.4px;text-transform:uppercase}
+.store b{display:block;font-size:16px;line-height:1.1}
+.rows{display:grid;gap:64px;margin-top:48px}
+.row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:center}
+.row:nth-child(even) .shot{order:2}
+.shot{display:flex;justify-content:center;position:relative}
+.shot::before{content:"";position:absolute;inset:12% 6%;border-radius:40px;background:radial-gradient(circle,var(--sky2),transparent 70%);z-index:0}
+.shot img{position:relative;z-index:1;width:min(270px,70%);border-radius:30px;border:7px solid #0E1230;box-shadow:0 30px 50px -24px rgba(14,18,48,.5)}
+.row h3{font-size:clamp(28px,3.6vw,40px)}
+.row p{color:var(--ink2);margin-top:12px;font-size:18px}
+.row .num{font-family:var(--display);color:var(--coral);font-size:18px;letter-spacing:1px}
+.ticks{margin:16px 0 0;padding:0;list-style:none;display:grid;gap:8px}
+.ticks li{display:flex;gap:10px;align-items:flex-start;font-weight:700}
+.ticks li::before{content:"";flex:none;width:18px;height:18px;margin-top:4px;border-radius:6px;background:var(--mint) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5 10.5l3 3 7-7' stroke='white' stroke-width='2.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/14px no-repeat}
+.strip{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(150px,1fr);gap:12px;overflow-x:auto;padding:6px 2px 16px;scroll-snap-type:x mandatory}
+.strip figure{margin:0;scroll-snap-align:start}
+.strip img{border-radius:18px;aspect-ratio:9/13;object-fit:cover;object-position:top;width:100%;border:1.5px solid var(--line)}
+.strip figcaption{font-weight:900;font-size:14.5px;margin-top:8px}
+.strip figcaption span{display:block;color:var(--ink3);font-weight:700;font-size:12.5px}
+.wall{display:grid;grid-template-columns:repeat(auto-fill,minmax(76px,1fr));gap:8px;margin-top:28px}
+.wall img{border-radius:14px;aspect-ratio:1;object-fit:cover;width:100%}
+.band{background:var(--night);color:#EEF2FF;position:relative;overflow:hidden}
+.band .wrap{display:grid;grid-template-columns:minmax(0,1.3fr) auto;gap:24px;align-items:center;padding-block:56px}
+.band h2{font-size:clamp(30px,4vw,44px)}
+.band p{color:#B4BCE0;margin-top:10px;max-width:58ch}
+.band .glow{position:absolute;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(255,90,60,.35),transparent 70%);right:-80px;top:-160px}
+.pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:34px}
+.pillar{padding:26px;display:grid;gap:10px;align-content:start}
+.pillar .ic{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;font-size:24px;background:var(--soft);border:1.5px solid var(--line)}
+.pillar h3{font-size:24px}
+.pillar p{color:var(--ink2)}
+/* guide */
+.ghead{background:linear-gradient(180deg,var(--sky2),var(--sky))}
+.ghead .wrap{padding-block:54px 34px}
+.ghead h1{font-size:clamp(44px,7vw,80px);margin-top:8px}
+.guide{display:grid;grid-template-columns:220px minmax(0,1fr);gap:40px;align-items:start;padding-block:40px 80px}
+.toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 86px);display:grid;gap:2px}
+.toc b{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.toc a{text-decoration:none;font-weight:800;font-size:15px;padding:7px 12px;border-radius:10px;color:var(--ink2);border-left:3px solid transparent}
+.toc a.on{color:var(--ink);background:var(--paper);border-left-color:var(--coral)}
+.gsec{padding-block:0 56px;scroll-margin-top:90px}
+.gsec h2{font-size:clamp(28px,3.6vw,38px);margin-top:6px}
+.gsec .lead{font-size:17px}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:22px}
+.step{padding:18px;display:grid;gap:10px;align-content:start}
+.step .n{width:36px;height:36px;border-radius:11px;background:var(--coral);color:#fff;font-family:var(--display);font-size:20px;display:grid;place-items:center}
+.step h3{font-size:21px}.step p{color:var(--ink2);font-size:15.5px}
+.step svg{width:100%;height:auto;border-radius:14px}
+.mechs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:22px}
+.mech{padding:16px 18px;display:grid;grid-template-columns:40px minmax(0,1fr);gap:12px}
+.mech .ic{width:40px;height:40px;border-radius:12px;background:var(--soft);display:grid;place-items:center;font-size:20px}
+.mech h3{font-size:18.5px}.mech p{color:var(--ink2);font-size:15px;margin-top:3px}
+.worlds{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:22px}
+.world{overflow:hidden}
+.world img{aspect-ratio:9/12;object-fit:cover;object-position:top;width:100%}
+.world .wt{padding:10px 12px}
+.world b{font-family:var(--display);font-weight:400;font-size:18px;display:block}
+.world span{font-size:12.5px;color:var(--ink2);font-weight:700;display:block}
+.bosses{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:22px}
+.boss{display:grid;grid-template-columns:48px minmax(0,1fr);gap:12px;align-items:center;padding:12px 14px}
+.boss .lv{font-family:var(--display);font-size:19px;width:48px;height:48px;border-radius:13px;display:grid;place-items:center;background:var(--ink);color:var(--gold)}
+.boss b{display:block;font-size:15.5px}.boss span{font-size:13.5px;color:var(--ink2)}
+.table-wrap{overflow-x:auto;border-radius:18px;border:1.5px solid var(--line);background:var(--paper);margin-top:22px}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:560px}
+th,td{text-align:left;padding:11px 13px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+th{font-size:11.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink3);background:var(--soft)}
+tr:last-child td{border-bottom:0}
+.c-common{color:var(--common)}.c-rare{color:var(--rare)}.c-epic{color:var(--epic)}.c-legend{color:var(--legend)}
+.grades{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:22px}
+.grade{padding:16px;text-align:center}
+.grade b{font-family:var(--display);font-weight:400;font-size:26px;display:block}
+.grade span{color:var(--ink2);font-size:15px}
+.list{margin:16px 0 0;padding:0;list-style:none;display:grid;gap:8px}
+.list li{display:flex;gap:10px;align-items:flex-start;color:var(--ink2)}
+.list li::before{content:"";flex:none;width:9px;height:9px;margin-top:9px;border-radius:3px;background:var(--coral);transform:rotate(45deg)}
+.rgroup{margin-top:20px}
+.rh{display:flex;align-items:center;gap:8px;font-family:var(--display);font-size:20px;color:var(--c)}
+.rh i{width:11px;height:11px;border-radius:3px;background:var(--c);transform:rotate(45deg)}
+.rh span{color:var(--ink3);font-family:var(--body);font-weight:800;font-size:14px}
+.r-common{--c:var(--common)}.r-rare{--c:var(--rare)}.r-epic{--c:var(--epic)}.r-legend{--c:var(--legend)}
+.skins{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:10px;margin-top:10px}
+.skin{text-align:center;font-size:12.5px;font-weight:800;position:relative}
+.skin img{border-radius:14px;aspect-ratio:1;object-fit:cover;width:100%;margin-bottom:4px;box-shadow:0 0 0 2px var(--c)}
+.skin .ach{position:absolute;top:5px;right:5px;font-style:normal;font-size:13px;background:rgba(0,0,0,.5);border-radius:999px;padding:1px 5px}
+.tips{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:22px}
+.tip{padding:16px 18px;display:grid;grid-template-columns:36px minmax(0,1fr);gap:10px}
+.tip .ic{font-size:24px}.tip b{display:block}.tip p{color:var(--ink2);font-size:15px}
+/* faq / support / press / doc */
+.faq{display:grid;gap:10px;margin-top:22px}
+details{background:var(--paper);border:1.5px solid var(--line);border-radius:18px;padding:16px 20px;box-shadow:var(--shadow)}
+summary{cursor:pointer;font-weight:900;font-size:16.5px;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--display);font-size:22px;color:var(--coral);line-height:1}
+details[open] summary::after{content:"–"}
+details p{color:var(--ink2);margin-top:10px}
+.contact{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:16px;align-items:center;padding:22px;margin-top:24px}
+.contact .ig{width:56px;height:56px;border-radius:17px;background:linear-gradient(135deg,#FFC23D,#FF5A3C 45%,#C13BD6);display:grid;place-items:center;color:#fff;font-family:var(--display);font-size:24px}
+.contact b{font-size:18px;display:block}
+.doc{max-width:780px;margin:0 auto;padding-block:56px 80px}
+.doc h1{font-size:clamp(38px,6vw,60px);margin-top:8px}
+.doc h2{font-size:24px;margin-top:34px}
+.doc p,.doc li{color:var(--ink2);margin-top:10px}
+.doc .meta{margin-top:10px;font-weight:800;color:var(--ink3)}
+.facts{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;margin-top:28px;align-items:start}
+.facts dl{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:0}
+.facts dt,.facts dd{padding:11px 16px;border-bottom:1px solid var(--line);margin:0}
+.facts dt{font-weight:900;color:var(--ink3);font-size:13px;letter-spacing:1px;text-transform:uppercase}
+.facts dd{font-weight:700}
+.facts dl>*:nth-last-child(-n+2){border-bottom:0}
+.shots{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:16px}
+.shots img{border-radius:14px;border:1.5px solid var(--line)}
+.copybox{position:relative;padding:18px 20px}
+.copybox p{color:var(--ink2)}
+.copybtn{position:absolute;top:14px;right:14px;font:900 12.5px var(--body);border-radius:999px;border:1.5px solid var(--line);background:var(--soft);color:var(--ink);padding:6px 12px;cursor:pointer}
+/* footer */
+footer{background:var(--night);color:#B4BCE0;font-size:15px}
+footer .wrap{display:grid;grid-template-columns:minmax(0,1.6fr) repeat(3,minmax(0,1fr));gap:30px;padding-block:52px 28px}
+footer h4{font-family:var(--body);font-weight:900;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:#fff;margin-bottom:12px}
+footer a{display:block;text-decoration:none;color:#DDE3FF;font-weight:700;padding:3px 0}
+footer a:hover{color:#fff}
+footer .brand{color:#fff;margin-bottom:12px}
+footer .kk{background:#fff;color:var(--night)}
+footer .legal{border-top:1px solid #2A3270;padding-block:18px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13.5px}
+.view[hidden]{display:none!important}
+@media (max-width:980px){
+  .menu{position:fixed;inset:calc(env(safe-area-inset-top,0px) + 66px) 0 auto 0;flex-direction:column;align-items:stretch;background:var(--paper);border-bottom:1px solid var(--line);padding:10px max(20px,env(safe-area-inset-right,0px)) 16px max(20px,env(safe-area-inset-left,0px));display:none;box-shadow:var(--shadow)}
+  .menu.open{display:flex}
+  .menu a{padding:12px 14px;font-size:17px}
+  .burger{display:grid;place-items:center}
+  .tools{margin-left:auto}
+  .hero .wrap,.featured,.row,.band .wrap,.facts{grid-template-columns:minmax(0,1fr)}
+  .row:nth-child(even) .shot{order:0}
+  .guide{grid-template-columns:minmax(0,1fr)}
+  .toc{position:static;display:flex;flex-wrap:wrap;gap:6px}.toc b{width:100%}.toc a{border:1.5px solid var(--line);background:var(--paper);border-radius:999px;padding:6px 12px;font-size:14px}
+  .stats{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .worlds,.shots{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .pillars,.steps{grid-template-columns:minmax(0,1fr)}
+  footer .wrap{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:620px){
+  section{padding-block:56px}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}.stats .stat:last-child{grid-column:1/-1}
+  .worlds,.shots{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .mechs,.bosses,.tips,.grades{grid-template-columns:minmax(0,1fr)}
+  .brand{font-size:19px}
+  .featured .copy{padding:24px}
+  .contact{grid-template-columns:auto minmax(0,1fr)}.contact .btn{grid-column:1/-1;justify-content:center}
+  .floaty{display:none}
+  footer .wrap{grid-template-columns:minmax(0,1fr)}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="nav pad"><div class="wrap">
+  <a class="brand" href="#home" aria-label="KK Games"><span class="kk">KK</span><span>KK Games</span></a>
+  <nav class="menu" id="menu" aria-label="Main"></nav>
+  <div class="tools">
+    <div class="lang" role="group" aria-label="Language"><button type="button" data-lang="tr">TR</button><button type="button" data-lang="en">EN</button></div>
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menu">☰</button>
+  </div>
+</div></header>
+<main id="app"></main>
+<footer class="pad" id="foot"></footer>
+
+<script>
+const IG='https://www.instagram.com/kkgames17/';
+let lang='tr';
+try{const s=localStorage.getItem('kk-lang'); if(s) lang=s; else if(!(navigator.language||'').toLowerCase().startsWith('tr')) lang='en';}catch(e){if(!(navigator.language||'').toLowerCase().startsWith('tr')) lang='en';}
+const t=(tr,en)=>lang==='tr'?tr:en;
+const A=n=>`assets/${n}`;
+const PIP=`<svg viewBox="-17 -19 34 36" aria-hidden="true"><g><rect x="-13.4" y="-4.2" width="7.4" height="11.6" rx="2.6" fill="#A8693A"/><rect x="-13.4" y="-4.2" width="7.4" height="4.2" rx="2" fill="#7E4A26"/><ellipse cx="-9.6" cy="6" rx="2.4" ry="3.4" fill="#3366CC"/><ellipse cx="-4.2" cy="12.6" rx="3.6" ry="2.3" fill="#3366CC"/><ellipse cx="4.4" cy="12.6" rx="3.6" ry="2.3" fill="#3366CC"/><ellipse cx="0" cy="1.4" rx="10.8" ry="10.6" fill="#3366CC"/><ellipse cx="-.7" cy=".6" rx="10.1" ry="9.9" fill="#4E8EF5"/><ellipse cx="-4.4" cy="-4.6" rx="3.6" ry="2.4" fill="#fff" opacity=".28"/><ellipse cx="2.2" cy="1.6" rx="7.6" ry="6.8" fill="#EAF3D6"/><path d="M -7.5 -5.5 Q -4.5 2 -6.5 9.5" stroke="#7E4A26" stroke-width="1.7" fill="none" stroke-linecap="round"/><ellipse cx="-1" cy="-1.3" rx="2.2" ry="2.7" fill="#1B2140"/><ellipse cx="5.4" cy="-1.3" rx="2.2" ry="2.7" fill="#1B2140"/><circle cx="-.2" cy="-2.4" r=".95" fill="#fff"/><circle cx="6.2" cy="-2.4" r=".95" fill="#fff"/><ellipse cx="-3.6" cy="2.6" rx="1.5" ry="1" fill="#FF7FA0" opacity=".6"/><ellipse cx="8.2" cy="2.6" rx="1.5" ry="1" fill="#FF7FA0" opacity=".6"/><path d="M 0 3 Q 2.3 6.6 4.6 3 Z" fill="#7A2638"/><ellipse cx="9.8" cy="6" rx="2.4" ry="3.4" fill="#4E8EF5"/><path d="M 0 -9 Q 0.4 -11 0.8 -12.6" stroke="#3E9A4E" stroke-width="1.3" fill="none" stroke-linecap="round"/><path d="M 0.8 -12.4 Q 5 -16.6 8.6 -13 Q 4.6 -10.2 0.8 -12.4 Z" fill="#55C76B"/><path d="M 0.6 -12.8 Q -2.6 -17.6 -6.6 -14.8 Q -3 -11.8 0.6 -12.8 Z" fill="#7FD98C"/></g></svg>`;
+const logo=(size)=>`<span class="logo" style="font-size:${size}" aria-label="Plop Hop"><span class="hopper">${PIP}</span><span class="p1">PLOP</span><span class="p2">${'HOP!'.split('').map(c=>`<span>${c}</span>`).join('')}</span></span>`;
+const ICON_PLAY=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3.5v17l14-8.5z" fill="currentColor"/></svg>`;
+const ICON_PHONE=`<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="18" r="1.2" fill="currentColor"/></svg>`;
+const stores=()=>`<div class="stores"><span class="store">${ICON_PLAY}<span><small>${t('Yakında','Coming soon')}</small><b>Google Play</b></span></span><span class="store">${ICON_PHONE}<span><small>${t('Yakında','Coming soon')}</small><b>App Store</b></span></span></div>`;
+
+const WORLDS=[['4','Çayır','Meadow','1–10','Eğik kesim, taşan kısmı kesme.','Slanted cuts, trimming the overhang.'],['16','Çöl','Desert','11–20','Hareketli şekiller, kum fırtınası.','Moving shapes, a sandstorm.'],['24','Buzul','Glacier','21–30','Sallanan şekiller.','Swinging shapes.'],['37','Volkan','Volcano','31–40','Lav çukurları, çelik engeller.','Lava pits, steel blockers.'],['44','Uzay','Cosmos','41–50','Düşük yerçekimi.','Low gravity.'],['53','Okyanus','Ocean','51–60','Kırılgan buz, dönen şekiller.','Fragile ice, spinning shapes.'],['66','Orman','Jungle','61–70','Yan yana üç şekil.','Three shapes side by side.'],['74','Şeker Diyarı','Candy Land','71–80','Kırılgan ve hareketli bir arada.','Fragile and moving together.'],['86','Neon Şehir','Neon City','81–90','Saatle yarış.','Against the clock.'],['97','Gökyüzü Adaları','Sky Islands','91–100','Her şey ve son boss.','Everything, and the final boss.']];
+const BOSSES=[['İki şekil, her birine ayrı kesim','Two shapes, one cut each','Bir kaydırma sadece ilk değdiği şekli keser.','A swipe only cuts the first shape it touches.'],['Kum fırtınası hayaleti gizliyor','Sandstorm hides the ghost','Hizalanma çizgisi görünmez, hareketi takip et.','The guide is hidden, so follow the motion.'],['İkisi de hareketli','Both of them move','İki şekli ayrı ayrı, doğru anda kes.','Cut each one separately, at the right moment.'],['Zincirler yanıyor!','The chains are burning!','8,3 saniyede üç şekil.','Three shapes in 8.3 seconds.'],['Düşük yerçekimi · 3 şekil','Low gravity · 3 shapes','Parçalar yavaş düşer.','Pieces fall slowly.'],['İki dönen şekil','Two spinning shapes','Her biri dik geldiğinde kesilir.','Cut each one when it is upright.'],['Ormanda üç şekil','Three in the jungle','Üç çukur, üç ayrı kesim.','Three holes, three cuts.'],['İki kırılgan, ikisi de hareketli','Two fragile movers','Özensiz oturan parça kırılır.','A sloppy fit shatters.'],['Dönen şekiller, yanan zincirler','Spin against the clock','Hem zamanlama hem hız.','Timing and speed at once.'],['Son boss · gökyüzünde üç şekil','Final boss · three in the sky','Öğrendiğin her şey tek bölümde.','Everything you learned, in one level.']];
+const MECH=[['✂️','Kaydır ve kes','Swipe to cut','Parmağını şeklin üstünden geçir. Alttaki parça düşer ve çukura oturur.','Swipe across the shape. The bottom piece drops into the hole.'],['📐','Eğik kes','Cut on a slant','Çukurun kenarı eğikse kesim de eğik olmalı.','If the rim is tilted, your cut should be too.'],['🔪','Taşan kısım','Trim the overhang','Şekil çukurdan genişse fazlasını da kes.','If the shape is wider than the hole, trim the extra.'],['👻','Hayaleti bekle','Wait for the ghost','Hareketli şekil silüetle hizalanınca kes.','Cut when the moving shape lines up with its ghost.'],['🎯','Sallanan ve dönen','Swinging & spinning','Sallanan hizalanınca, dönen dik gelince kesilir.','Cut a swinger when it lines up, a spinner when it is upright.'],['🛡️','Çelik engel','Steel bars','Çelik bıçağı durdurur, etrafından kes.','Steel stops your blade, so cut around it.'],['❄️','Kırılgan buz','Fragile ice','Tam oturmazsa kırılır. GOOD yetmez.','It shatters unless it fits cleanly. GOOD is not enough.'],['🔥','Lav çukurları','Lava pits','Pip lava değerse kaybedersin.','If Pip touches lava, you lose.']];
+const TIPS=[['⬆️','"Biraz daha yukarıdan kes"','"Cut a little higher"','Parça çukuru doldurmuyorsa kesimi yukarı taşı.','If the piece does not fill the hole, move your cut up.'],['⬇️','"Biraz daha aşağıdan kes"','"Cut a little lower"','Parça taşıyor ve Pip takılıyorsa kesimi indir.','If it sticks out and Pip gets stuck, cut lower.'],['📐','Açıya dikkat','Mind the angle','Çukurun iki kenarının yüksekliğine bak, ona paralel kes.','Compare both rim heights and cut parallel to them.'],['⏱️','Ritmi say','Count the rhythm','Bir tur izle, ikinci turda kes.','Watch one cycle, cut on the next.'],['💡','İpucu düğmesi','Hint button','Ampule dokun, doğru kesim çizgisi görünür.','Tap the bulb to see the right cut line.'],['🔥','PERFECT serisi','PERFECT streak','Üst üste PERFECT bölüm başına bonus coin verir.','PERFECTs in a row add bonus coins per level.']];
+const CHESTS=[['Ahşap','Wooden',150,1,[72,24,4,0],['—','—'],['Günün 3 görevi','3 daily missions']],['Gümüş','Silver',400,2,[55,35,9,1],['—','—'],['7. gün hediyesi · 1–3. harita boss\'ları','Day-7 gift · bosses 1–3']],['Altın','Gold',900,3,[35,42,19,4],['1 Nadir+','1 Rare+'],['4–10. harita boss\'ları','Bosses 4–10']],['Büyülü','Magic',2000,3,[0,45,40,15],['1 Epik+','1 Epic+'],['—','—']]];
+const SKINS=[['classic','Klasik','Classic','common'],['mint','Nane','Mint','common'],['sunny','G\xFCne\u015F','Sunny','common'],['bubble','Sak\u0131z','Bubblegum','common'],['cocoa','Kakao','Cocoa','common'],['grape','\xDCz\xFCm','Grape','common'],['tangerine','Mandalina','Tangerine','common'],['coal','K\xF6m\xFCr','Coal','common'],['snow','Kar','Snow','common'],['lime','Limon','Lime','common'],['sky','G\xF6ky\xFCz\xFC','Sky','common'],['panda','Panda','Panda','common'],['ladybug','U\u011Fur B\xF6ce\u011Fi','Ladybug','common'],['zebra','Zebra','Zebra','common'],['watermelon','Karpuz','Watermelon','common'],['dalmatian','Dalma\xE7yal\u0131','Dalmatian','common'],['peach','\u015Eeftali','Peach','common'],['ocean','Okyanus','Ocean','common'],['fire','Ate\u015F','Fire','rare'],['berry','B\xF6\u011F\xFCrtlen','Berry','rare'],['ice','Buz','Ice','rare'],['pirate','Korsan','Pirate','rare'],['bee','Ar\u0131','Bee','rare'],['cactus','Kakt\xFCs','Cactus','rare'],['chef','A\u015F\xE7\u0131','Chef','rare'],['viking','Viking','Viking','rare'],['wizard','B\xFCy\xFCc\xFC','Wizard','rare'],['cowboy','Kovboy','Cowboy','rare'],['frog','Kurba\u011Fa','Frog','rare'],['bunny','Tav\u015Fan','Bunny','rare'],['cat','Kedi','Cat','rare'],['mushroom','Mantar','Mushroom','rare'],['mummy','Mumya','Mummy','rare'],['astro','Astronot','Astronaut','rare'],['ninja','Ninja','Ninja','epic'],['galaxy','Galaksi','Galaxy','epic'],['robot','Robo','Robo','epic'],['crystal','Kristal','Crystal','epic'],['ghost','Hayalet','Ghost','epic'],['jelly','J\xF6le','Jelly','epic'],['abyss','Derin Deniz','Abyss','epic'],['pixel','Piksel','Pixel','epic','endless25'],['sakura','Kiraz \xC7i\xE7e\u011Fi','Sakura','epic','gift7'],['thunder','\u015Eim\u015Fek','Thunder','epic','daily7'],['king','Kral','King','legend'],['dragon','Ejder','Dragon','legend'],['lava','Lav','Lava','legend'],['nebula','Nebula','Nebula','legend','bosses'],['phoenix','Anka','Phoenix','legend','streak25'],['angel','Melek','Angel','legend','stars150']];
+const ACHN={endless25:['Sonsuz modda 25. bölüm','Reach level 25 in Endless'],gift7:['7 gün üst üste hediye aç','Open gifts 7 days in a row'],daily7:['7 gün üst üste günlük bulmaca','Daily puzzle 7 days in a row'],bosses:['10 boss\'un hepsini yen','Beat all 10 bosses'],streak25:['Üst üste 25 PERFECT','PERFECT streak of 25'],stars150:['Tüm yıldızları topla','Collect every star']};
+const RAR={common:['Sıradan','Common'],rare:['Nadir','Rare'],epic:['Epik','Epic'],legend:['Efsanevi','Legendary']};
+const FAQ=[['Oyun ücretsiz mi?','Is the game free?','Evet, tüm bölümler ücretsiz. Reklamları Kaldır, Başlangıç Paketi ve coin paketleri gibi isteğe bağlı satın almalar var. Hiçbiri oyunda avantaj sağlamaz.','Yes, every level is free. There are optional purchases such as Remove Ads, a Starter Pack and coin packs. None of them give a gameplay advantage.'],['İnternet gerekiyor mu?','Do I need internet?','Hayır, Plop Hop internetsiz oynanır. Sadece reklamlar ve satın almalar için internet gerekir.','No, Plop Hop plays offline. Only ads and purchases need a connection.'],['Reklamları nasıl kaldırırım?','How do I remove ads?','Mağaza\'dan Reklamları Kaldır\'ı al. Bölüm aralarındaki reklamlar tamamen kapanır. 2 kat coin gibi ödüllü reklamlar ise isteğe bağlı olarak kalır.','Buy Remove Ads in the Shop. Ads between levels disappear completely. Rewarded ads, like double coins, stay available as an option.'],['Satın aldığım ürün kayboldu, ne yapmalıyım?','I lost something I bought. What now?','Mağaza ekranının altındaki Satın alımları geri yükle butonuna bas. Reklamları Kaldır ve Başlangıç Paketi aynı Google ya da Apple hesabıyla geri gelir. Coin paketleri harcandığı için geri yüklenmez.','Tap Restore purchases at the bottom of the Shop. Remove Ads and the Starter Pack come back on the same Google or Apple account. Coin packs are consumed, so they cannot be restored.'],['İlerlemem nerede saklanıyor?','Where is my progress saved?','Sadece cihazında. Hesap ve bulut kaydı yok, oyunu silersen ilerleme de silinir.','Only on your device. No accounts or cloud saves; deleting the game deletes your progress.'],['Hangi dilleri destekliyor?','Which languages are supported?','Türkçe ve İngilizce. Ayarlardan değiştirebilirsin.','Turkish and English. Switch in Settings.'],['Kostümler oyunu kolaylaştırır mı?','Do costumes make the game easier?','Hayır. Kostümler sadece görünüş içindir.','No. Costumes are cosmetic only.'],['Ne zaman çıkıyor?','When is it out?','Çok yakında Google Play ve App Store\'da. Duyurular Instagram\'da: @kkgames17.','Very soon on Google Play and the App Store. Announcements on Instagram: @kkgames17.'],['Fikrimi oyuna nasıl ekletirim?','How do I get my idea into the game?','Instagram paylaşımlarımıza yorum yaz. En çok beğenilen uygulanabilir fikir oyuna eklenir ve seni etiketleriz.','Comment on our Instagram posts. The most-liked idea we can build gets added and we tag you.']];
+
+function stepSVG(k){
+  const base=`<rect width="200" height="120" fill="#CFEBFF"/><path d="M0 84 H70 L84 104 H116 L130 84 H200 V120 H0Z" fill="#B98B63"/><rect x="0" y="80" width="70" height="5" fill="#5CCB7A"/><rect x="130" y="80" width="70" height="5" fill="#5CCB7A"/>`;
+  if(k===0) return `<svg viewBox="0 0 200 120" aria-hidden="true">${base}<line x1="100" y1="0" x2="100" y2="22" stroke="#6E7690" stroke-dasharray="3 3"/><path d="M80 22 H120 V54 L116 74 H84 L80 54Z" fill="#E0A066" stroke="#7A4A24" stroke-width="2"/><line x1="66" y1="56" x2="134" y2="52" stroke="#FF5A3C" stroke-width="4" stroke-linecap="round"/><circle cx="134" cy="52" r="7" fill="#fff" stroke="#1B2140" stroke-width="2"/></svg>`;
+  if(k===1) return `<svg viewBox="0 0 200 120" aria-hidden="true">${base}<path d="M80 22 H120 V52 H80Z" fill="#E0A066" stroke="#7A4A24" stroke-width="2"/><path d="M84 84 H116 L112 104 H88Z" fill="#E0A066" stroke="#7A4A24" stroke-width="2"/><text x="136" y="40" font-family="sans-serif" font-weight="900" font-size="13" fill="#E5A00F">PERFECT!</text></svg>`;
+  return `<svg viewBox="0 0 200 120" aria-hidden="true">${base}<path d="M84 84 H116 L112 104 H88Z" fill="#E0A066" stroke="#7A4A24" stroke-width="2"/><circle cx="100" cy="72" r="9" fill="#4E8EF5"/><circle cx="103" cy="70" r="1.6" fill="#1B2140"/><circle cx="98" cy="70" r="1.6" fill="#1B2140"/><circle cx="172" cy="72" r="8" fill="#FF8FC8"/><path d="M180 52 v24" stroke="#1B2140" stroke-width="2"/><path d="M180 52 l12 4 -12 4z" fill="#FF5A3C"/><path d="M60 68 q20 -14 30 0" stroke="#1B2140" stroke-width="2" fill="none" stroke-dasharray="3 3"/></svg>`;
+}
+const STATS=()=>`<div class="stats">${[['100',t('bölüm','levels')],['10',t('dünya','worlds')],['10',t('boss','bosses')],['50',t('kostüm','costumes')],['∞',t('sonsuz mod','endless mode')]].map(([n,l])=>`<div class="card stat"><b>${n}</b><span>${l}</span></div>`).join('')}</div>`;
+const phoneVideo=()=>`<div class="phone"><video src="${A('gameplay.mp4')}" poster="${A('gameplay-poster.jpg')}" autoplay muted loop playsinline aria-label="${t('Plop Hop oynanış videosu','Plop Hop gameplay video')}"></video></div>`;
+const igBand=()=>`<section class="band pad"><div class="glow"></div><div class="wrap"><div><div class="eyebrow">${t('Topluluk','Community')}</div><h2>${t('Oyunu birlikte yapıyoruz.','We build the game with you.')}</h2><p>${t('Her paylaşımın en çok beğenilen yorumu oyuna ekleniyor. Çıkış tarihini, yeni bölümleri ve kostümleri ilk Instagram\'da duyuruyoruz.','The most-liked comment on every post gets added to the game. Release dates, new levels and costumes are announced on Instagram first.')}</p></div><a class="btn" href="${IG}" target="_blank" rel="noopener">${t('@kkgames17\'i takip et','Follow @kkgames17')} →</a></div></section>`;
+
+function homeView(){
+  return `<section class="hero pad"><div class="wrap">
+    <div><div class="eyebrow">${t('Bağımsız mobil oyun stüdyosu','Independent mobile game studio')}</div>
+      <h1>${t('Küçük oyunlar,','Small games,')}<br><span class="slice">${t('büyük keyif.','big fun.')}</span></h1>
+      <p class="lead">${t('KK Games, kısa sürede öğrenilen ama bırakması zor mobil oyunlar yapan bağımsız bir stüdyo. İlk oyunumuz Plop Hop çok yakında telefonlarda.','KK Games is an independent studio making mobile games that take a minute to learn and a long time to put down. Our first game, Plop Hop, is coming to phones very soon.')}</p>
+      <div class="cta"><a class="btn" href="#plop-hop">${t('Plop Hop\'u keşfet','Discover Plop Hop')} →</a><a class="btn ghost" href="#guide">${t('Oyun rehberi','Game guide')}</a></div></div>
+    <div style="position:relative">${phoneVideo()}<span class="floaty a">PERFECT! ✨</span><span class="floaty b">∞ 35</span><span class="floaty c">🐉 ${t('Efsanevi','Legendary')}</span></div>
+  </div><div class="ground"></div></section>
+  <section class="pad"><div class="wrap">
+    <div class="eyebrow">${t('Öne çıkan oyun','Featured game')}</div><h2 class="h2">${t('Oyunlarımız','Our games')}</h2>
+    <article class="card featured" style="margin-top:28px"><div class="art"><img src="${A('world-37.jpg')}" alt=""><img src="${A('world-4.jpg')}" alt=""><img src="${A('world-86.jpg')}" alt=""></div>
+      <div class="copy">${logo('64px')}
+        <p class="muted" style="font-size:18px">${t('Tek kaydırma, tek kesim, kusursuz oturuş. Şekli doğru yerden kes, parça çukura otursun, Pip karşıya geçsin.','One swipe, one cut, a perfect fit. Cut the shape in the right place, drop the piece into the hole, and get Pip across.')}</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px"><span class="chip">${t('Bulmaca','Puzzle')}</span><span class="chip">${t('Ücretsiz','Free')}</span><span class="chip">${t('Çevrimdışı','Offline')}</span><span class="chip">TR · EN</span></div>
+        ${stores()}
+        <div><a class="btn small" href="#plop-hop">${t('Oyun sayfası','Game page')} →</a></div></div></article>
+  </div></section>
+  <section class="pad sec-tight"><div class="wrap center"><div class="eyebrow">${t('Nasıl çalışıyoruz','How we work')}</div><h2 class="h2">${t('Üç ilke','Three principles')}</h2></div>
+    <div class="wrap pillars">
+      <div class="card pillar"><div class="ic">💬</div><h3>${t('Toplulukla','Built with you')}</h3><p>${t('En çok beğenilen yorumlar oyuna giriyor, sahipleri etiketleniyor. Oyuncular oyunun bir parçası.','The most-liked comments make it into the game and their authors get tagged.')}</p></div>
+      <div class="card pillar"><div class="ic">⚖️</div><h3>${t('Adil oyun','Fair play')}</h3><p>${t('Para ile güç satılmaz. Kostümler sadece görünüş içindir, her bölüm ücretsiz oynanır.','No pay-to-win. Costumes are cosmetic and every level is free to play.')}</p></div>
+      <div class="card pillar"><div class="ic">🔒</div><h3>${t('Verine dokunmayız','Your data stays yours')}</h3><p>${t('Hesap yok. İlerlemen sadece kendi cihazında, reklam izinlerini sen seçersin.','No accounts. Progress lives on your device, and you choose your ad privacy settings.')} <a href="#privacy">${t('Gizlilik','Privacy')}</a></p></div>
+    </div></section>
+  ${igBand()}`;
+}
+
+function gameView(){
+  const rows=[
+    ['world-4.jpg','01',t('Tek kaydırma, tek kesim','One swipe, one cut'),t('Asılı şeklin üstünden parmağını kaydır. Çizginin altında kalan parça düşer ve çukura oturur. Çukuru tam doldurursan PERFECT.','Swipe across the hanging shape. The part below your line drops into the hole. Fill it exactly for a PERFECT.'),[t('Öğrenmesi 10 saniye','Learn it in 10 seconds'),t('Her bölümde yeni bir düşünme biçimi','A new way of thinking every level')]],
+    ['world-24.jpg','02',t('Zamanlama her şey','Timing is everything'),t('Şekiller sallanır, döner, kayar. Hayalet silüetle hizalandığı anı yakala ve o an kes.','Shapes swing, spin and slide. Catch the moment they line up with the ghost and cut.'),[t('Sallanan, dönen, kayan şekiller','Swinging, spinning, sliding shapes'),t('Kırılgan buz, lav, çelik','Fragile ice, lava, steel')]],
+    ['world-100.jpg','03',t('10 boss','10 bosses'),t('Her dünyanın sonunda bir boss seni bekler: yanan zincirler, kum fırtınası, düşük yerçekimi ve gökyüzündeki son boss.','A boss waits at the end of every world: burning chains, a sandstorm, low gravity, and the final boss in the sky.'),[t('Her boss yeni bir kural','A new rule for every boss'),t('İlk zaferde bedava sandık','A free chest on the first win')]],
+    ['endless.jpg','04',t('Sonsuz mod','Endless mode'),t('Bölümler art arda gelir, hızlanır ve dünya değiştirir. Tek hata seriyi bitirir. Rekorunu kır, skorunu paylaş.','Levels keep coming, faster and across worlds. One mistake ends the run. Beat your record and share it.'),[t('Her 10 bölümde bonus coin','Bonus coins every 10 levels'),t('Paylaşılabilir skor kartı','A shareable score card')]],
+    ['chest.jpg','05',t('4 sandık, 50 kostüm','4 chests, 50 costumes'),t('Ahşaptan Büyülüye dört sandık, Sıradandan Efsaneviye 50 kostüm ve 16 kesme izi. Efsanevilerin kendine özel kaybetme animasyonları var.','Four chests from Wooden to Magic, 50 costumes from Common to Legendary, and 16 swipe trails. Every Legendary has its own fail animation.'),[t('Oranlar açıkça görünür','Drop rates always shown'),t('6 kostüm sadece başarımla açılır','6 costumes unlock only through achievements')]],
+  ];
+  return `<section class="hero pad"><div class="wrap">
+    <div>${logo('clamp(64px,10vw,118px)')}
+      <p class="lead" style="font-size:21px">${t('Tek kaydırma. Tek kesim. Kusursuz oturuş.','One swipe. One cut. A perfect fit.')}</p>
+      <p class="lead">${t('Şekli doğru yerden kes, parça çukura otursun, Pip karşıdaki arkadaşına ulaşsın. Kolay başlar, boss\'larda ellerin titrer.','Cut the shape in the right place so the piece fills the hole and Pip reaches a friend. It starts easy; the bosses will make your hands shake.')}</p>
+      <div class="cta">${stores()}</div>
+      <div class="cta" style="margin-top:14px"><a class="btn ghost small" href="#guide">${t('Oyun rehberi','Game guide')}</a><a class="btn ghost small" href="#press">${t('Basın kiti','Press kit')}</a></div></div>
+    <div>${phoneVideo()}</div></div><div class="ground"></div></section>
+  <section class="pad sec-tight"><div class="wrap">${STATS()}</div></section>
+  <section class="pad" style="padding-top:20px"><div class="wrap"><div class="center"><div class="eyebrow">${t('Özellikler','Features')}</div><h2 class="h2">${t('Neden bırakamayacaksın','Why you won\'t put it down')}</h2></div>
+    <div class="rows">${rows.map(r=>`<div class="row"><div class="shot"><img src="${A(r[0])}" alt=""></div><div><div class="num">${r[1]}</div><h3>${r[2]}</h3><p>${r[3]}</p><ul class="ticks">${r[4].map(x=>`<li>${x}</li>`).join('')}</ul></div></div>`).join('')}</div></div></section>
+  <section class="pad" style="background:var(--paper)"><div class="wrap"><div class="eyebrow">${t('Harita','Map')}</div><h2 class="h2">${t('10 dünya','10 worlds')}</h2><p class="lead">${t('Çayırdan gökyüzü adalarına, her dünyada yeni bir mekanik ve sonunda bir boss.','From meadow to sky islands, every world brings a new mechanic and ends with a boss.')}</p>
+    <div class="strip" style="margin-top:24px">${WORLDS.map((w,i)=>`<figure><img src="${A('world-'+w[0]+'.jpg')}" alt="${t(w[1],w[2])}"><figcaption>${i+1}. ${t(w[1],w[2])}<span>${t('Bölüm','Levels')} ${w[3]}</span></figcaption></figure>`).join('')}</div></div></section>
+  <section class="pad"><div class="wrap center"><div class="eyebrow">${t('Gardırop','Wardrobe')}</div><h2 class="h2">${t('50 Pip, hangisi sensin?','50 Pips. Which one are you?')}</h2><p class="lead">${t('Kostümler sadece görünüş içindir. Hepsi sandıklardan ya da başarımlardan gelir.','Costumes are cosmetic only. They all come from chests or achievements.')}</p>
+    <div class="wall">${SKINS.map(s=>`<img src="${A('skin-'+s[0]+'.jpg')}" alt="${t(s[1],s[2])} Pip" title="${t(s[1],s[2])} Pip">`).join('')}</div>
+    <div class="cta" style="justify-content:center"><a class="btn ghost" href="#guide" data-jump="g-chests">${t('Sandıklar ve kostümler','Chests & costumes')} →</a></div></div></section>
+  ${igBand()}`;
+}
+
+function guideView(){
+  const toc=[['g-how',t('Nasıl oynanır','How to play')],['g-mech',t('Mekanikler','Mechanics')],['g-worlds',t('Dünyalar','Worlds')],['g-bosses',t('Boss\'lar','Bosses')],['g-modes',t('Modlar','Modes')],['g-score',t('Puanlama','Scoring')],['g-chests',t('Sandıklar ve kostümler','Chests & costumes')],['g-tips',t('İpuçları','Tips')]];
+  const sec=(id,eb,h,lead,inner)=>`<div class="gsec" id="${id}"><div class="eyebrow">${eb}</div><h2>${h}</h2>${lead?`<p class="lead">${lead}</p>`:''}${inner}</div>`;
+  return `<header class="ghead pad"><div class="wrap"><div class="eyebrow">${t('Resmi rehber','Official guide')}</div><h1>${t('Plop Hop rehberi','Plop Hop guide')}</h1><p class="lead">${t('Kesmeyi, zamanlamayı, boss\'ları ve sandıkları anlatan rehber. Bütün sayılar oyunun kendisinden.','How cutting, timing, bosses and chests work. Every number comes straight from the game.')}</p></div></header>
+  <div class="pad"><div class="wrap guide">
+    <aside class="toc" id="toc"><b>${t('İçindekiler','Contents')}</b>${toc.map(([id,l])=>`<a href="#guide" data-jump="${id}">${l}</a>`).join('')}</aside>
+    <div>
+    ${sec('g-how',t('Başlangıç','Basics'),t('Nasıl oynanır','How to play'),t('Amaç: Pip\'in karşıdaki arkadaşına ulaşması için yoldaki çukurları doldurmak.','The goal: fill the holes in the path so Pip can reach a friend on the other side.'),
+      `<div class="steps">${[[t('Kes','Cut'),t('Asılı şeklin üstünden kaydır. Çizginin altındaki parça kopar.','Swipe across the hanging shape. The part below breaks off.')],[t('Oturt','Fit'),t('Parça çukura düşer. Tam doldurursa PERFECT.','The piece drops into the hole. Fill it exactly for a PERFECT.')],[t('Geç','Cross'),t('GO\'ya bas, Pip yürüsün. Çukurlar doluysa karşıya ulaşır.','Tap GO. If every hole is filled, Pip makes it across.')]].map(([h,p],k)=>`<div class="card step"><div class="n">${k+1}</div>${stepSVG(k)}<h3>${h}</h3><p>${p}</p></div>`).join('')}</div>`)}
+    ${sec('g-mech',t('Mekanikler','Mechanics'),t('Bilmen gerekenler','What to know'),'',`<div class="mechs">${MECH.map(m=>`<div class="card mech"><div class="ic">${m[0]}</div><div><h3>${t(m[1],m[2])}</h3><p>${t(m[3],m[4])}</p></div></div>`).join('')}</div>`)}
+    ${sec('g-worlds',t('Harita','Map'),t('10 dünya, 100 bölüm','10 worlds, 100 levels'),t('Her dünyada 10 bölüm var ve 10. bölüm boss.','Each world has 10 levels and the 10th is a boss.'),`<div class="worlds">${WORLDS.map((w,i)=>`<div class="card world"><img src="${A('world-'+w[0]+'.jpg')}" alt="${t(w[1],w[2])}"><div class="wt"><b>${i+1} · ${t(w[1],w[2])}</b><span>${t('Bölüm','Levels')} ${w[3]}</span><span style="font-weight:600;margin-top:2px">${t(w[4],w[5])}</span></div></div>`).join('')}</div>`)}
+    ${sec('g-bosses',t('Her dünyanın sonunda','End of every world'),t('10 boss','10 bosses'),t('İlk kez yendiğinde 50 coin ve bedava sandık: ilk üç dünyada Gümüş, sonrasında Altın.','First win: 50 coins and a free chest, Silver for worlds 1–3 and Gold after that.'),`<div class="bosses">${BOSSES.map((b,i)=>`<div class="card boss"><div class="lv">${(i+1)*10}</div><div><b>${t(b[0],b[1])}</b><span>${t(b[2],b[3])}</span></div></div>`).join('')}</div>`)}
+    ${sec('g-modes',t('Oyun modları','Game modes'),t('Bölümler bitince de oyun bitmez','The game goes on after the campaign'),'',`<div class="mechs">${[['🗺️',t('Macera','Campaign'),t('10 dünya, 100 bölüm, her biri 3 yıldız üzerinden.','10 worlds, 100 levels, each out of 3 stars.')],['∞',t('Sonsuz mod','Endless'),t('Tek hata oyunu bitirir. Bölüm başına +2 coin, her 10 bölümde +15.','One mistake ends it. +2 coins per level, +15 every 10.')],['📅',t('Günün bulmacası','Daily puzzle'),t('Her gün herkese aynı bulmaca. Seriyi bozma.','The same puzzle for everyone each day. Keep the streak.')],['📋',t('Görevler','Missions'),t('Her gün 3 görev, üçü bitince bedava Ahşap sandık.','Three missions a day; finish all for a free Wooden chest.')],['🎁',t('Günlük hediye','Daily gift'),t('7 günlük seri, 7. gün Gümüş sandık.','A 7-day streak; day 7 gives a Silver chest.')],['🏆',t('Başarımlar','Achievements'),t('22 başarım, her biri coin verir, altısı özel bir kostüm de verir.','22 achievements with coins; six also unlock a costume.')]].map(m=>`<div class="card mech"><div class="ic">${m[0]}</div><div><h3>${m[1]}</h3><p>${m[2]}</p></div></div>`).join('')}</div>`)}
+    ${sec('g-score',t('Puanlama','Scoring'),'PERFECT · GREAT · GOOD',t('Her çukur ne kadar iyi dolduğuna göre not alır. Yıldızlar bu nota ve kullandığın kesim sayısına bağlı.','Every hole gets a grade. Stars depend on the grade and how many cuts you used.'),`<div class="grades"><div class="card grade"><b class="c-legend">PERFECT</b><span>${t('Kusursuz oturuş.','A flawless fit.')}</span></div><div class="card grade"><b class="c-rare">GREAT</b><span>${t('Çok yakın, küçük bir boşluk.','Very close, a tiny gap.')}</span></div><div class="card grade"><b class="c-common">GOOD</b><span>${t('Geçer, yıldız kaybettirir.','Passes, costs stars.')}</span></div></div><ul class="list"><li>${t('İlk geçiş +10 coin, her yeni yıldız +5.','First clear +10 coins, each new star +5.')}</li><li>${t('PERFECT serisi bölüm başına bonus verir (en fazla +10).','A PERFECT streak adds a per-level bonus (up to +10).')}</li><li>${t('Bir dünyayı bitirmek +50 coin.','Finishing a world +50 coins.')}</li></ul>`)}
+    ${sec('g-chests',t('Kostümler ve bıçaklar','Costumes & blades'),t('Sandıklar ve 50 kostüm','Chests and 50 costumes'),t('50 kostüm ve 16 kesme izi var. 6 kostüm başarımla açılır, geri kalanı sandıktan çıkar. Sahip olduğun bir şey çıkarsa coin\'e dönüşür: 15 / 40 / 120 / 300.','50 costumes and 16 swipe trails. Six costumes unlock through achievements; the rest come from chests. Duplicates turn into coins: 15 / 40 / 120 / 300.')+' '+t('Mağazadaki Haftanın Kostümleri vitrininde her pazartesi bir Epik (2.500 coin) ve bir Efsanevi (6.000 coin) kostüm doğrudan satılır.','The Costumes of the Week shelf in the Shop sells one Epic (2,500 coins) and one Legendary (6,000 coins) costume directly, refreshed every Monday.'),
+      `<div class="table-wrap"><table><thead><tr><th>${t('Sandık','Chest')}</th><th>${t('Fiyat','Price')}</th><th>${t('Kart','Cards')}</th><th class="c-common">${t('Sıradan','Common')}</th><th class="c-rare">${t('Nadir','Rare')}</th><th class="c-epic">${t('Epik','Epic')}</th><th class="c-legend">${t('Efsanevi','Legendary')}</th><th>${t('Garanti','Guarantee')}</th><th>${t('Bedava','Free from')}</th></tr></thead><tbody>${CHESTS.map(c=>`<tr><td><b>${t(c[0],c[1])}</b></td><td style="white-space:nowrap">🪙 ${c[2].toLocaleString(lang==='tr'?'tr-TR':'en-US')}</td><td>${c[3]}</td>${c[4].map(v=>`<td>${t('%'+v,v+'%')}</td>`).join('')}<td>${t(...c[5])}</td><td>${t(...c[6])}</td></tr>`).join('')}</tbody></table></div>
+      ${['common','rare','epic','legend'].map(r=>`<div class="rgroup r-${r}"><div class="rh"><i></i>${t(...RAR[r])} <span>· ${SKINS.filter(s=>s[3]===r).length}</span></div><div class="skins">${SKINS.filter(s=>s[3]===r).map(s=>`<div class="skin r-${r}"><img src="${A('skin-'+s[0]+'.jpg')}" alt="${t(s[1],s[2])} Pip">${s[4]?`<em class="ach" title="${t(...ACHN[s[4]])}">🏆</em>`:''}${t(s[1],s[2])}</div>`).join('')}</div></div>`).join('')}
+      <h3 style="font-size:22px;margin-top:26px">🏆 ${t('Başarımla açılan 6 kostüm','6 achievement costumes')}</h3><ul class="list">${SKINS.filter(s=>s[4]).map(s=>`<li><span><b style="color:var(--ink)">${t(s[1],s[2])} Pip</b> <span class="c-${s[3]}">(${t(...RAR[s[3]])})</span>: ${t(...ACHN[s[4]])}</span></li>`).join('')}</ul>`)}
+    ${sec('g-tips',t('Takıldın mı?','Stuck?'),t('İpuçları','Tips'),t('Kaybettiğinde oyun neyin yanlış gittiğini söyler. Anlamları:','When you lose, the game tells you what went wrong. Here is what it means:'),`<div class="tips">${TIPS.map(x=>`<div class="card tip"><span class="ic">${x[0]}</span><div><b>${t(x[1],x[2])}</b><p>${t(x[3],x[4])}</p></div></div>`).join('')}</div>`)}
+    </div></div></div>`;
+}
+
+function pressView(){
+  const short=t('Plop Hop, tek kaydırmayla şekilleri kesip çukurlara oturttuğun bir mobil bulmaca oyunu. 10 dünya, 100 bölüm, 10 boss, sonsuz mod ve 50 kostüm.','Plop Hop is a mobile puzzle game where you slice shapes with one swipe and drop them into holes. 10 worlds, 100 levels, 10 bosses, an endless mode and 50 costumes.');
+  const long=t('Plop Hop\'ta asılı duran şekli doğru yerden kesip kopan parçayı yoldaki çukura oturtuyorsun, böylece küçük kahraman Pip karşıdaki arkadaşına ulaşıyor. Bölümler ilerledikçe şekiller sallanmaya, dönmeye ve kaymaya başlıyor; lav çukurları, kırılgan buz ve çelik engeller işin içine giriyor. Her dünyanın sonunda kendi kuralı olan bir boss var. Sonsuz modda tek hata seriyi bitiriyor. Oyun bağımsız stüdyo KK Games tarafından, topluluğun önerileriyle geliştiriliyor.','In Plop Hop you slice a hanging shape in exactly the right place and drop the piece into the hole below, so little Pip can reach a friend on the other side. As you progress, shapes start to swing, spin and slide, and lava pits, fragile ice and steel blockers join in. Every world ends with a boss that has its own rule. In Endless mode, one mistake ends the run. The game is made by independent studio KK Games, shaped by suggestions from its community.');
+  return `<div class="doc pad" style="max-width:1000px"><div class="eyebrow">${t('Basın ve içerik üreticileri','Press & creators')}</div><h1>${t('Basın kiti','Press kit')}</h1><p class="lead">${t('Plop Hop hakkında yazmak ya da video çekmek için ihtiyacın olan her şey. Metinleri ve görselleri serbestçe kullanabilirsin.','Everything you need to write about or film Plop Hop. Feel free to use the text and images.')}</p>
+  <div class="facts"><div class="card" style="overflow:hidden"><dl>
+    <dt>${t('Oyun','Game')}</dt><dd>Plop Hop</dd><dt>${t('Geliştirici','Developer')}</dt><dd>KK Games</dd><dt>${t('Tür','Genre')}</dt><dd>${t('Bulmaca, beceri','Puzzle, skill')}</dd><dt>${t('Platform','Platforms')}</dt><dd>iOS, Android</dd><dt>${t('Çıkış','Release')}</dt><dd>${t('Yakında','Coming soon')}</dd><dt>${t('Fiyat','Price')}</dt><dd>${t('Ücretsiz, isteğe bağlı satın almalar','Free, optional in-app purchases')}</dd><dt>${t('Diller','Languages')}</dt><dd>${t('Türkçe, İngilizce','Turkish, English')}</dd><dt>${t('İçerik','Content')}</dt><dd>${t('100 bölüm, 10 boss, sonsuz mod, günlük bulmaca, 50 kostüm','100 levels, 10 bosses, endless, daily puzzle, 50 costumes')}</dd><dt>${t('İletişim','Contact')}</dt><dd><a href="${IG}" target="_blank" rel="noopener">@kkgames17</a></dd></dl></div>
+    <div style="display:grid;gap:14px"><div class="card copybox"><button class="copybtn" type="button" data-copy="short">${t('Kopyala','Copy')}</button><b>${t('Kısa açıklama','Short description')}</b><p id="short" style="margin-top:8px">${short}</p></div>
+      <div class="card copybox"><button class="copybtn" type="button" data-copy="long">${t('Kopyala','Copy')}</button><b>${t('Uzun açıklama','Long description')}</b><p id="long" style="margin-top:8px">${long}</p></div></div></div>
+  <h2>${t('Logo','Logo')}</h2><div class="card" style="padding:34px;display:flex;gap:30px;align-items:center;flex-wrap:wrap;justify-content:center">${logo('84px')}<div style="background:#141936;border-radius:18px;padding:22px 30px"><span class="logo" style="font-size:60px"><span class="p1" style="color:#fff">PLOP</span><span class="p2">${'HOP!'.split('').map(c=>`<span>${c}</span>`).join('')}</span></span></div></div>
+  <h2>${t('Ekran görüntüleri','Screenshots')}</h2><div class="shots">${['4','24','37','53','86','100','16','44','66','97'].map(n=>`<img src="${A('world-'+n+'.jpg')}" alt="">`).join('')}</div>
+  <h2>${t('Öne çıkanlar','Highlights')}</h2><ul class="list">${[t('Tek parmakla oynanır, öğrenmesi 10 saniye.','One-finger play, learnable in 10 seconds.'),t('Sallanan, dönen ve kırılgan şekillerle zamanlama bulmacaları.','Timing puzzles with swinging, spinning and fragile shapes.'),t('Her dünyanın sonunda kendi kuralı olan bir boss.','A boss with its own rule at the end of every world.'),t('Oyuncu yorumlarıyla şekillenen içerik.','Content shaped by player comments.'),t('İnternetsiz oynanır, kostümler sadece görünüş içindir.','Plays offline, and costumes are cosmetic only.')].map(x=>`<li>${x}</li>`).join('')}</ul>
+  </div>`;
+}
+
+function supportView(){
+  return `<div class="doc pad"><div class="eyebrow">${t('Yardım','Help')}</div><h1>${t('Destek','Support')}</h1><p class="lead">${t('Sorunun aşağıda yoksa bize Instagram\'dan yaz, genelde bir gün içinde dönüyoruz.','If your question is not below, message us on Instagram. We usually reply within a day.')}</p>
+  <div class="faq">${FAQ.map(f=>`<details><summary>${t(f[0],f[1])}</summary><p>${t(f[2],f[3])}</p></details>`).join('')}</div>
+  <h2>${t('Bir hata mı buldun?','Found a bug?')}</h2><p>${t('Mesajına şunları eklersen çok daha hızlı çözeriz:','Include these and we can fix it much faster:')}</p>
+  <ul class="list"><li>${t('Telefon modeli ve işletim sistemi sürümü','Phone model and OS version')}</li><li>${t('Hangi bölümde ya da ekranda olduğu','Which level or screen it happened on')}</li><li>${t('Mümkünse bir ekran görüntüsü ya da kısa video','A screenshot or short video if you can')}</li></ul>
+  <div class="card contact"><div class="ig">IG</div><div><b>@kkgames17</b><span class="muted">${t('Instagram\'dan mesaj gönder','Send a message on Instagram')}</span></div><a class="btn" href="${IG}" target="_blank" rel="noopener">${t('Mesaj gönder','Message us')}</a></div></div>`;
+}
+
+function privacyView(){
+  return `<div class="doc pad"><div class="eyebrow">Plop Hop</div><h1>${t('Gizlilik politikası','Privacy policy')}</h1><p class="meta">${t('Son güncelleme: 30 Ekim 2026','Last updated: October 30, 2026')}</p>
+  <p>${t('Bu politika, KK Games tarafından geliştirilen Plop Hop mobil oyununun ("oyun") hangi bilgileri kullandığını, kimlerle paylaştığını ve senin hangi seçimlere sahip olduğunu açıklar.','This policy explains what information Plop Hop, the mobile game made by KK Games ("the game"), uses, who it is shared with, and what choices you have.')}</p>
+  <h2>${t('Kısaca','In short')}</h2><ul class="list"><li>${t('Hesap açman gerekmez; KK Games olarak adını, e-postanı ya da rehberini istemeyiz ve almayız.','You do not need an account. KK Games does not ask for or receive your name, email or contacts.')}</li><li>${t('Oyun ilerlemen sadece telefonunda saklanır.','Your game progress is stored only on your phone.')}</li><li>${t('Reklamlar Google AdMob tarafından gösterilir. AdMob reklam göstermek için bazı cihaz bilgilerini işler; izinleri sen seçersin.','Ads are served by Google AdMob, which processes some device information to show ads. You control the permissions.')}</li><li>${t('Satın almaları Google Play ve App Store yürütür; ödeme bilgilerini biz görmeyiz.','Purchases are handled by Google Play and the App Store. We never see your payment details.')}</li></ul>
+  <h2>${t('Cihazında saklananlar','What is stored on your device')}</h2><p>${t('Oyun ilerlemen (açılan bölümler, yıldızlar, coin, kostümler, sandıklar, başarımlar, satın aldığın ürünler, ayarlar ve dil tercihin) sadece cihazının yerel depolamasında tutulur ve bize gönderilmez. Oyunu silersen bu veriler de silinir.','Your progress (levels, stars, coins, costumes, chests, achievements, purchased items, settings and language) is kept only in your device\'s local storage and is not sent to us. Deleting the game deletes this data.')}</p>
+  <h2>${t('Reklamlar (Google AdMob)','Ads (Google AdMob)')}</h2><p>${t('Oyun ücretsiz olduğu için reklam gösterir. Reklamlar Google AdMob tarafından sunulur. AdMob; reklam kimliği (Android reklam kimliği ya da iOS IDFA), IP adresi ve buna dayalı yaklaşık konum, cihaz ve uygulama bilgileri ile reklam etkileşimleri gibi verileri reklam göstermek, ölçmek ve sahteciliği önlemek için işleyebilir. Bu veriler Google\'ın kendi politikalarına tabidir:','The game is free, so it shows ads. Ads are served by Google AdMob. AdMob may process data such as your advertising ID (Android advertising ID or iOS IDFA), IP address and approximate location derived from it, device and app information, and ad interactions in order to show and measure ads and prevent fraud. This data is subject to Google\'s own policies:')} <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">${t('Google, iş ortaklarının sitelerini ya da uygulamalarını kullandığında verileri nasıl kullanır','How Google uses information from sites or apps that use its services')}</a>.</p>
+  <ul class="list"><li>${t('Avrupa Ekonomik Alanı, Birleşik Krallık ve İsviçre\'de oyun ilk açılışta Google\'ın izin formunu gösterir. Seçimini sonradan Ayarlar > Gizlilik ayarları\'ndan değiştirebilirsin.','In the European Economic Area, the UK and Switzerland, the game shows Google\'s consent form on first launch. You can change your choice later in Settings > Privacy settings.')}</li><li>${t('iPhone\'da oyun, reklamlar için takip izni ister. Reddedersen reklamlar yine çıkar ama kişiselleştirilmez.','On iPhone, the game asks for tracking permission for ads. If you decline, ads still appear but are not personalised.')}</li><li>${t('Reklam içerikleri genel izleyiciye uygun seviyeyle (PG) sınırlandırılmıştır.','Ad content is limited to a general-audience (PG) rating.')}</li><li>${t('Ödüllü reklamlar her zaman isteğe bağlıdır. Reklamları Kaldır satın alınınca bölüm arası reklamlar tamamen kapanır.','Rewarded ads are always optional. Buying Remove Ads turns off ads between levels completely.')}</li></ul>
+  <h2>${t('Satın almalar','Purchases')}</h2><p>${t('Reklamları Kaldır, Başlangıç Paketi ve coin paketleri gibi isteğe bağlı satın almalar Google Play ya da App Store üzerinden yapılır. Ödeme bilgilerin bize ulaşmaz; biz sadece ürünü açmak için mağazanın onayını alırız ve bu onay cihazında saklanır. İade talepleri ilgili mağazanın kurallarına tabidir.','Optional purchases such as Remove Ads, the Starter Pack and coin packs are made through Google Play or the App Store. Your payment details never reach us; we only receive the store\'s confirmation to unlock the item, which is stored on your device. Refunds follow the rules of the store you bought from.')}</p>
+  <h2>${t('Analiz','Analytics')}</h2><p>${t('Oyunda analiz ya da takip aracı yoktur. Nasıl oynadığına dair verileri toplamıyoruz.','The game contains no analytics or tracking tools. We do not collect data about how you play.')}</p>
+  <h2>${t('Paylaşma','Sharing')}</h2><p>${t('"Paylaş" düğmesi sadece senin seçtiğin bir metni (örneğin skorunu) cihazının paylaşım menüsüne gönderir. Ne paylaşacağına ve nereye paylaşacağına sen karar verirsin.','The "Share" button only passes a text you choose (such as your score) to your device\'s share menu. You decide what to share and where.')}</p>
+  <h2>${t('Çocuklar','Children')}</h2><p>${t('Oyun genel kitleye yöneliktir, özellikle çocuklar için tasarlanmamıştır. 13 yaşından küçük çocuklardan bilerek kişisel bilgi toplamayız. Reklam içerikleri genel izleyiciye uygun seviyeyle sınırlıdır.','The game is made for a general audience and is not specifically directed at children. We do not knowingly collect personal information from children under 13. Ad content is limited to a general-audience rating.')}</p>
+  <h2>${t('Değişiklikler','Changes')}</h2><p>${t('Oyuna yeni bir hizmet eklersek (örneğin liderlik tablosu) bu politikayı güncelleriz ve sayfadaki tarihi değiştiririz.','If we add a new service to the game (for example a leaderboard), we will update this policy and change the date on this page.')}</p>
+  <h2>${t('İletişim','Contact')}</h2><div class="card contact"><div class="ig">IG</div><div><b>@kkgames17</b><span class="muted">${t('Sorularını Instagram\'dan gönderebilirsin.','Send us your questions on Instagram.')}</span></div><a class="btn" href="${IG}" target="_blank" rel="noopener">${t('Mesaj gönder','Message us')}</a></div></div>`;
+}
+
+const VIEWS={home:homeView,'plop-hop':gameView,guide:guideView,press:pressView,support:supportView,privacy:privacyView};
+const NAV=[['home',()=>t('Ana sayfa','Home')],['plop-hop',()=>'Plop Hop'],['guide',()=>t('Rehber','Guide')],['press',()=>t('Basın','Press')],['support',()=>t('Destek','Support')]];
+const TITLES={home:'KK Games','plop-hop':'Plop Hop · KK Games',guide:()=>t('Plop Hop rehberi · KK Games','Plop Hop guide · KK Games'),press:()=>t('Basın kiti · KK Games','Press kit · KK Games'),support:()=>t('Destek · KK Games','Support · KK Games'),privacy:()=>t('Gizlilik politikası · KK Games','Privacy policy · KK Games')};
+function footer(){
+  return `<div class="wrap"><div><a class="brand" href="#home"><span class="kk">KK</span><span>KK Games</span></a><p style="max-width:34ch">${t('Küçük oyunlar, büyük keyif. Bağımsız mobil oyun stüdyosu.','Small games, big fun. An independent mobile game studio.')}</p></div>
+    <div><h4>${t('Oyunlar','Games')}</h4><a href="#plop-hop">Plop Hop</a><a href="#guide">${t('Rehber','Guide')}</a></div>
+    <div><h4>${t('Stüdyo','Studio')}</h4><a href="#press">${t('Basın kiti','Press kit')}</a><a href="#support">${t('Destek','Support')}</a><a href="${IG}" target="_blank" rel="noopener">Instagram</a></div>
+    <div><h4>${t('Yasal','Legal')}</h4><a href="#privacy">${t('Gizlilik politikası','Privacy policy')}</a></div></div>
+    <div class="wrap legal"><span>© 2026 KK Games</span><span>${t('Google Play ve App Store, ilgili şirketlerin ticari markalarıdır.','Google Play and App Store are trademarks of their respective owners.')}</span></div>`;
+}
+let tocObs=null;
+function route(){
+  let h=(location.hash||'#home').slice(1); if(!VIEWS[h]) h='home';
+  document.documentElement.lang=lang;
+  document.getElementById('menu').innerHTML=NAV.map(([id,l])=>`<a href="#${id}" ${id===h?'aria-current="page"':''}>${l()}</a>`).join('');
+  document.querySelectorAll('.lang button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===lang)));
+  document.getElementById('app').innerHTML=VIEWS[h]();
+  document.getElementById('foot').innerHTML=footer();
+  const T=TITLES[h]; document.title=typeof T==='function'?T():T;
+  closeMenu();
+  if(tocObs){tocObs.disconnect();tocObs=null;}
+  const toc=document.getElementById('toc');
+  if(toc && 'IntersectionObserver' in window){
+    tocObs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){toc.querySelectorAll('a').forEach(a=>a.classList.toggle('on',a.dataset.jump===e.target.id));}})},{rootMargin:'-30% 0px -60% 0px'});
+    document.querySelectorAll('.gsec').forEach(s=>tocObs.observe(s));
+  }
+  if(pendingJump){const id=pendingJump; pendingJump=null; requestAnimationFrame(()=>document.getElementById(id)?.scrollIntoView());} else window.scrollTo(0,0);
+}
+let pendingJump=null;
+function closeMenu(){document.getElementById('menu').classList.remove('open');document.getElementById('burger').setAttribute('aria-expanded','false');}
+document.getElementById('burger').addEventListener('click',()=>{const m=document.getElementById('menu');const o=!m.classList.contains('open');m.classList.toggle('open',o);document.getElementById('burger').setAttribute('aria-expanded',String(o));});
+document.querySelector('.lang').addEventListener('click',e=>{const b=e.target.closest('button'); if(!b) return; lang=b.dataset.lang; try{localStorage.setItem('kk-lang',lang)}catch(err){} const y=scrollY; route(); scrollTo(0,y);});
+document.addEventListener('click',e=>{
+  const j=e.target.closest('[data-jump]');
+  if(j){ if(location.hash==='#guide'){ e.preventDefault(); document.getElementById(j.dataset.jump)?.scrollIntoView({behavior:'smooth'}); } else { pendingJump=j.dataset.jump; } }
+  const c=e.target.closest('[data-copy]');
+  if(c){ const el=document.getElementById(c.dataset.copy); const done=()=>{c.textContent=t('Kopyalandı','Copied');setTimeout(()=>c.textContent=t('Kopyala','Copy'),1500)};
+    const fb=()=>{const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r);};
+    try{navigator.clipboard.writeText(el.textContent).then(done,fb);}catch(err){fb();} }
+});
+addEventListener('hashchange',route); route();
+</script>
+</body>
+</html>
